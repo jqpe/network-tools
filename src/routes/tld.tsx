@@ -58,7 +58,7 @@ const TldPage = () => {
   }
 
   return (
-    <main className="max-w-prose mx-auto py-8">
+    <main className="max-w-prose mx-auto py-8 px-2">
       <H1>Top level domains</H1>
 
       <Paragraph className="text-foreground/70 mt-2">

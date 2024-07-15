@@ -26,10 +26,10 @@ const WhoisPage = () => {
   }
 
   return (
-    <main className="max-w-prose mx-auto py-8">
+    <main className="max-w-prose mx-auto py-8 px-2">
       <H1>Whois</H1>
       <Paragraph className="text-foreground/70 mt-2">
-        Lookup whois infromation (e.g. expiry date, status...) for a domain. Not
+        Lookup whois information (e.g. expiry date, status...) for a domain. Not
         all top level domains are supported at the moment, but common ones are.
         Mileage may vary.
       </Paragraph>
