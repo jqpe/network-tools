@@ -1,11 +1,11 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import React from 'react'
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
 } from '~/components/ui/dialog'
 import { IANA_DB } from '~/constants'
 import { tldsOptions, useTlds } from '~/services/iana'
