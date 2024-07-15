@@ -5,7 +5,7 @@ import { cn } from '~/utils'
 
 export const BackToTop = () => {
   const [visible, setVisible] = React.useState(false)
-  const parentRef = React.useRef()
+  const parentRef = React.useRef<HTMLDivElement>(null)
 
   React.useLayoutEffect(() => {
     const onScroll = () => {

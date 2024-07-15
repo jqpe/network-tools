@@ -6,7 +6,7 @@ import { IanaTld } from '~/types/iana.ts'
 
 interface Props {
   tlds: IanaTld[]
-  filter: Parameters<Array<IanaTld>['filter']>[0]
+  filter: (tld: IanaTld) => boolean
 }
 
 type TldList = (props: Props) => JSX.Element
@@ -14,6 +14,7 @@ type TldList = (props: Props) => JSX.Element
 export const TldList = memo<TldList>(function TldList({ tlds, filter }) {
   const listRef = React.useRef<HTMLDivElement>(null)
   const shownTlds = tlds.filter(filter)
+
   const virtualizer = useWindowVirtualizer({
     count: shownTlds.length,
     scrollMargin: listRef.current?.offsetTop ?? 0,
