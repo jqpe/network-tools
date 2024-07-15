@@ -1,8 +1,29 @@
-import { useQuery as useSuspenseQuery } from '@tanstack/react-query'
+import {
+  queryOptions,
+  useQuery as useSuspenseQuery,
+} from '@tanstack/react-query'
 import punycode from 'punycode'
-import { TLD_LIST_URI } from '~/constants'
+import { IANA_DB, TLD_LIST_URI } from '~/constants'
 import { IanaResponse, IanaTld } from '~/types/iana'
-import { queryOptions } from '@tanstack/react-query'
+
+export const parseDelegationRecordPage = (html: string) => {
+  const parser = new DOMParser()
+  const document = parser.parseFromString(html, 'text/html')
+
+  const article = document.querySelector<HTMLDivElement>('article > main')
+
+  let isGTLD = /(Generic top-level domain)/.test(
+    article.querySelector('p')?.textContent ?? ''
+  )
+
+  return {
+    /**
+     * Is this TLD part of the Generic top level domain program?
+     * @see https://en.wikipedia.org/wiki/Generic_top-level_domain
+     */
+    isGTLD,
+  }
+}
 
 export const ianaService = {
   getTlds: async (): Promise<IanaResponse> => {
@@ -34,12 +55,26 @@ export const ianaService = {
 
     return { updatedAt, tlds }
   },
+  getTld: async (tld: string) => {
+    const response = await fetch(new URL(`${tld.toLowerCase()}.html`, IANA_DB))
+    const text = await response.text()
+
+    return parseDelegationRecordPage(text)
+  },
 }
 
-export const ianaOptions = queryOptions({
+export const tldsOptions = queryOptions({
   queryKey: ['iana-tlds'],
   queryFn: ianaService.getTlds,
   staleTime: Infinity,
 })
 
-export const useIana = () => useSuspenseQuery(ianaOptions)
+export const tldOptions = (tld: string) =>
+  queryOptions({
+    queryKey: ['iana-tlds', tld],
+    queryFn: () => ianaService.getTld(tld),
+    staleTime: Infinity,
+  })
+
+export const useTlds = () => useSuspenseQuery(tldsOptions)
+export const useTld = (tld: string) => useSuspenseQuery(tldOptions(tld))

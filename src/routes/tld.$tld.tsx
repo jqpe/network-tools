@@ -1,14 +1,14 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import React from 'react'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
 } from '~/components/ui/dialog'
 import { IANA_DB } from '~/constants'
-import { ianaOptions, useIana } from '~/services/iana'
+import { tldsOptions, useTlds } from '~/services/iana'
 
 // How long to wait before navigating to previous screen upon
 // Dialog being closed; when zero no close animation for dialog
@@ -19,7 +19,7 @@ const TldPage = () => {
   const router = useRouter()
   const params = Route.useParams()
 
-  const ianaQuery = useIana()
+  const ianaQuery = useTlds()
   const tld = ianaQuery.data?.tlds.find(tld => {
     return (
       (tld.punycode ?? tld.unicode).toLowerCase() === params.tld.toLowerCase()
@@ -62,7 +62,7 @@ const TldPage = () => {
 
 export const Route = createFileRoute('/tld/$tld')({
   loader: ({ context: { queryClient } }) => {
-    return queryClient.ensureQueryData(ianaOptions)
+    return queryClient.ensureQueryData(tldsOptions)
   },
   component: TldPage,
 })
