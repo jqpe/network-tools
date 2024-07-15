@@ -13,7 +13,7 @@ function findRDAPUrl(domain: string) {
 
   const foundTld = tlds.find(i => i[0].find(j => j === tld))
   if (!foundTld) {
-    throw new Error(`Unable to find tld ${tld}`)
+    throw new Error(`Unable to find tld \`${tld}\``)
   }
   const rdapUrl = trimSlash(foundTld[1][0])
   return rdapUrl
