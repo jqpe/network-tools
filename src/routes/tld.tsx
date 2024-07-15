@@ -64,8 +64,8 @@ const TldPage = () => {
           id="tld"
           name="tld"
           onInput={onInput}
-          className="block border-slate-200 border-2 rounded-sm my-2 px-0.5 w-full"
-          placeholder="search with a regular expression"
+          className="block border-slate-50 shadow-md border-2 rounded-md my-1 px-2 py-0.5 w-full"
+          placeholder="Search with a regex"
         />
         <Popover>
           <PopoverTrigger>

@@ -20,7 +20,7 @@ export const ianaService = {
     }
 
     const updatedAt = new Date(dateMatch[1])
-    const tlds = lines.slice(1).map(tld => {
+    const tlds = lines.slice(1, -1).map(tld => {
       const regex = /^xn--/i
       const isPunycode = tld.match(regex)
 
