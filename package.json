@@ -7,10 +7,11 @@
   "scripts": {
     "ui": "pnpm dlx shadcn-ui@latest",
     "dev": "vite",
+    "preview": "wrangler pages dev dist",
+    "prepreview": "pnpm build",
     "build": "vite build",
     "test": "vitest run",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
@@ -32,6 +33,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240712.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tanstack/router-devtools": "^1.45.1",
     "@tanstack/router-plugin": "^1.45.0",
@@ -49,7 +51,8 @@
     "typescript": "^5.5.3",
     "vite": "^5.3.1",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^2.0.3"
+    "vitest": "^2.0.3",
+    "wrangler": "^3.64.0"
   },
   "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903"
 }
