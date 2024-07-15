@@ -38,7 +38,7 @@ export const whoisService = {
 
 export const whoisOptions = (domain: string) =>
   queryOptions({
-    queryKey: ['whois'],
+    queryKey: ['whois', domain],
     queryFn: () => whoisService.whois(domain),
     staleTime: Infinity,
   })
