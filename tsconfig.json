@@ -8,6 +8,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "types": ["./src/types/env.d.ts"],
+    "noImplicitAny": false,
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "skipLibCheck": true,

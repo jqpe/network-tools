@@ -13,7 +13,6 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as WhoisImport } from './routes/whois'
 import { Route as TldImport } from './routes/tld'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as WhoisDomainImport } from './routes/whois.$domain'
 import { Route as TldTldImport } from './routes/tld.$tld'
@@ -27,11 +26,6 @@ const WhoisRoute = WhoisImport.update({
 
 const TldRoute = TldImport.update({
   path: '/tld',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutRoute = AboutImport.update({
-  path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -59,13 +53,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
     '/tld': {
@@ -103,7 +90,6 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  AboutRoute,
   TldRoute: TldRoute.addChildren({ TldTldRoute }),
   WhoisRoute: WhoisRoute.addChildren({ WhoisDomainRoute }),
 })
@@ -117,16 +103,12 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about",
         "/tld",
         "/whois"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
     },
     "/tld": {
       "filePath": "tld.tsx",
