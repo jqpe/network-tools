@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "preserve",
+    "strict": true,
     "allowJs": true,
     "checkJs": true,
     "jsx": "react-jsx",
@@ -9,9 +10,10 @@
     "types": ["./src/types/env.d.ts"],
     "allowImportingTsExtensions": true,
     "noEmit": true,
+    "skipLibCheck": true,
     "paths": {
       "~/*": ["./src/*"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", ".wrangler"]
 }

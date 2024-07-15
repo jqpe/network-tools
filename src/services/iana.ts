@@ -13,7 +13,7 @@ export const parseDelegationRecordPage = (html: string) => {
   const article = document.querySelector<HTMLDivElement>('article > main')
 
   let isGTLD = /(Generic top-level domain)/.test(
-    article.querySelector('p')?.textContent ?? ''
+    article?.querySelector('p')?.textContent ?? ''
   )
 
   return {

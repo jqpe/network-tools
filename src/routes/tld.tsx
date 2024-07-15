@@ -26,7 +26,10 @@ const TldPage = () => {
   const updatedAt = ianaQuery.data?.updatedAt.toLocaleDateString()
 
   const tldFilterPredicate = (tld: IanaTld): boolean => {
-    return filter.test(tld.unicode) || filter.test(tld.punycode)
+    const unicodeOk = filter.test(tld.unicode)
+    const punycodeOk = Boolean(tld.punycode && filter.test(tld.punycode))
+
+    return unicodeOk || punycodeOk
   }
 
   const onInput: React.FormEventHandler<HTMLInputElement> = event => {
@@ -38,7 +41,7 @@ const TldPage = () => {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault()
 
-    const tld = tlds.filter(tldFilterPredicate).at(0)
+    const tld = tlds?.filter(tldFilterPredicate).at(0)
 
     if (tld) {
       navigate({ to: '$tld', params: { tld: tld.punycode ?? tld.unicode } })
@@ -57,11 +60,11 @@ const TldPage = () => {
     <main className="max-w-prose mx-auto py-8">
       <H1>Top level domains</H1>
 
-      <Paragraph>
+      <Paragraph className="text-foreground/70">
         All top level domains in the root zone, updated <b>{updatedAt}</b>
       </Paragraph>
 
-      <form onSubmit={onSubmit} className="flex gap-2">
+      <form onSubmit={onSubmit} className="flex gap-2 mt-4">
         <Input
           id="tld"
           name="tld"
@@ -91,7 +94,7 @@ const TldPage = () => {
         </Popover>
       </form>
 
-      <TldList tlds={tlds} filter={tldFilterPredicate} />
+      <TldList tlds={tlds ?? []} filter={tldFilterPredicate} />
 
       <Outlet />
     </main>
