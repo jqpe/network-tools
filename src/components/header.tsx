@@ -14,6 +14,9 @@ export function Header() {
         <Link to="/tld" className="[&.active]:font-bold">
           Top level domains
         </Link>
+        <Link to="/whois" className="[&.active]:font-bold">
+          Whois
+        </Link>
 
         <ThemeToggle />
       </nav>
