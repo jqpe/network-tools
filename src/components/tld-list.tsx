@@ -1,0 +1,54 @@
+import { Link } from '@tanstack/react-router'
+import { useWindowVirtualizer } from '@tanstack/react-virtual'
+import React, { memo } from 'react'
+import { IanaTld } from '~/types/iana.ts'
+
+interface Props {
+  tlds: IanaTld[]
+  filter: Parameters<Array<IanaTld>['filter']>[0]
+}
+
+type TldList = (props: Props) => JSX.Element
+
+const List: TldList = ({ tlds, filter }) => {
+  const listRef = React.useRef<HTMLDivElement | null>()
+  const shownTlds = tlds.filter(filter)
+  const virtualizer = useWindowVirtualizer({
+    count: shownTlds.length,
+    scrollMargin: listRef.current?.offsetTop ?? 0,
+    // link height
+    estimateSize: () => 19,
+  })
+
+  return (
+    <div ref={listRef}>
+      <ul
+        className="relative"
+        style={{ height: `${virtualizer.getTotalSize()}px` }}
+      >
+        {virtualizer.getVirtualItems().map(item => {
+          const { index, start, key, size } = item
+
+          const { unicode, punycode } = shownTlds[index]
+
+          return (
+            <li
+              className="absolute top-0 left-0 w-full"
+              key={key}
+              style={{
+                height: `${size}px`,
+                transform: `translateY(${start - virtualizer.options.scrollMargin}px)`,
+              }}
+            >
+              <Link to="/tld/$tld" params={{ tld: punycode ?? unicode }}>
+                {unicode}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
+
+export const TldList = memo(List)

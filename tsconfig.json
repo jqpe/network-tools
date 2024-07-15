@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "preserve",
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "types": ["./src/types/env.d.ts"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}
