@@ -1,6 +1,7 @@
 import { ArrowUpToLine } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import React from 'react'
+import { cn } from '~/utils'
 
 export const BackToTop = () => {
   const [visible, setVisible] = React.useState(false)
@@ -38,10 +39,13 @@ export const BackToTop = () => {
               opacity: 0,
               y: 40,
             }}
-            className="mb-10 mr-10 shadow-lg p-2 rounded-full bg-slate-950 pointer-events-auto"
+            className={cn(
+              'mb-10 mr-10 shadow-lg p-2 rounded-full border',
+              'pointer-events-auto'
+            )}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <ArrowUpToLine color='white' />
+            <ArrowUpToLine />
           </motion.button>
         </div>
       )}
