@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import React from 'react'
 import {
   Dialog,
@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '~/components/ui/dialog'
+import { Anchor } from '~/components/ui/link'
 import { IANA_DB } from '~/constants'
 import { tldsOptions, useTlds } from '~/services/iana'
 
@@ -16,7 +17,8 @@ const DIALOG_CLOSE_DEBOUNCE_MS = 100
 
 const TldPage = () => {
   const [open, setOpen] = React.useState(true)
-  const router = useRouter()
+  const navigate = useNavigate({ from: '/tld/$tld' })
+
   const params = Route.useParams()
 
   const ianaQuery = useTlds()
@@ -35,7 +37,9 @@ const TldPage = () => {
     setOpen(false)
     await new Promise(resolve => setTimeout(resolve, DIALOG_CLOSE_DEBOUNCE_MS))
 
-    router.history.back()
+    // TODO: when navigating from dialog -> tld , dialog -> tld ... 
+    // we will have 1...Infinite occurances of /tld route in the stack 
+    navigate({ to: '/tld', replace: true })
   }
 
   return (
@@ -45,14 +49,14 @@ const TldPage = () => {
           <DialogTitle>{tld.unicode}</DialogTitle>
           <DialogDescription>
             View this top level domain in the{' '}
-            <a
+            <Anchor
               target="_blank"
               rel="noopener noreferrer"
               href={databaseUri.toString()}
               data-punycode={!!tld.punycode}
             >
               root
-            </a>
+            </Anchor>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

@@ -6,3 +6,4 @@ const LinkStyles = (props: JSX.IntrinsicElements['a']) => {
 }
 
 export const Link = createLink(LinkStyles)
+export const Anchor = LinkStyles
