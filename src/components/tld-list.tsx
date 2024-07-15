@@ -20,6 +20,8 @@ export const TldList = memo<TldList>(function TldList({ tlds, filter }) {
     scrollMargin: listRef.current?.offsetTop ?? 0,
     // link height
     estimateSize: () => 19,
+    overscan: 5,
+    gap: 16,
   })
 
   return (

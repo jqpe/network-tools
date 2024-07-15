@@ -1,3 +1,4 @@
+import { cva, VariantProps } from 'cva'
 import { cn } from '~/utils'
 
 export const H1 = (props: JSX.IntrinsicElements['h1']) => {
@@ -71,11 +72,22 @@ export const Blockquote = (props: JSX.IntrinsicElements['blockquote']) => {
   )
 }
 
-export const List = (props: JSX.IntrinsicElements['ul']) => {
+const list = cva({
+  base: 'my-4 [&>li]:mt-2',
+  variants: {
+    variant: {
+      markers: 'list-disc ml-6',
+    },
+  },
+})
+
+export const List = (
+  props: JSX.IntrinsicElements['ul'] & VariantProps<typeof list>
+) => {
   return (
     <ul
       {...props}
-      className={cn('my-6 ml-6 list-disc [&>li]:mt-2', props.className)}
+      className={list({ variant: props.variant, className: props.className })}
     />
   )
 }

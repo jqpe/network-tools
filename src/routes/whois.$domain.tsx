@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table'
-import { H2, H3 } from '~/components/ui/typography'
+import { H2, H3, List } from '~/components/ui/typography'
 import { useWhois, whoisOptions } from '~/services/rdap'
 
 const WhoisPageError = ({ error }: ErrorComponentProps) => {
@@ -21,8 +21,8 @@ const WhoisPageError = ({ error }: ErrorComponentProps) => {
         <Network className="h-4 w-4" />
         <AlertTitle>Domain could not be resolved</AlertTitle>
         <AlertDescription className="mt-2">
-          The top level domain does not exist in the used rdap database, you may
-          look the domain up on an alternative service like{' '}
+          There is no known rdap service for the domain, if the formatting is
+          correct, look the domain up on an alternative service like{' '}
           <Anchor
             target="_blank"
             rel="noreferrer noopener"
@@ -71,10 +71,19 @@ const WhoisPage = () => {
         </TableBody>
       </Table>
 
-      <H3>Nameservers</H3>
-      {whois.nameservers.map(nameserver => (
-        <div key={nameserver.ldhName}>{nameserver.ldhName}</div>
-      ))}
+      <H3 className="text-lg">Nameservers</H3>
+      <List>
+        {whois.nameservers.map(nameserver => (
+          <li key={nameserver.ldhName}>{nameserver.ldhName}</li>
+        ))}
+      </List>
+
+      <H3 className="text-lg">Status</H3>
+      <List>
+        {whois.status.map(status => (
+          <li key={status}>{status}</li>
+        ))}
+      </List>
     </article>
   )
 }
