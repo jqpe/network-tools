@@ -53,9 +53,13 @@ export const Paragraph = (props: JSX.IntrinsicElements['p']) => {
   return (
     <p
       {...props}
-      className={cn('leading-7 [&:not(:first-child)]:mt-6', props.className)}
+      className={cn('leading-7 [:not(:first-child)]:mt-6', props.className)}
     />
   )
+}
+
+export const Text = (props: JSX.IntrinsicElements['span']) => {
+  return <span {...props} className={cn('leading-5 block', props.className)} />
 }
 
 export const Blockquote = (props: JSX.IntrinsicElements['blockquote']) => {

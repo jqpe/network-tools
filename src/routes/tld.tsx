@@ -11,14 +11,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '~/components/ui/popover'
-import { Code, H1, H4, Paragraph } from '~/components/ui/typography'
-import { INITIAL_TLD_FILTER } from '~/constants'
+import { Code, H1, H4, Paragraph, Text } from '~/components/ui/typography'
 import { useTlds } from '~/services/iana'
 import { IanaTld } from '~/types/iana.ts'
 
 const TldPage = () => {
   const navigate = useNavigate({ from: '/tld' })
-  const [filter, setFilter] = React.useState<RegExp>(INITIAL_TLD_FILTER)
+  const [filter, setFilter] = React.useState<RegExp>()
   const ianaQuery = useTlds()
 
   const { tlds } = ianaQuery.data ?? {}
@@ -26,6 +25,8 @@ const TldPage = () => {
   const updatedAt = ianaQuery.data?.updatedAt.toLocaleDateString()
 
   const tldFilterPredicate = (tld: IanaTld): boolean => {
+    if (!filter) return true
+
     const unicodeOk = filter.test(tld.unicode)
     const punycodeOk = Boolean(tld.punycode && filter.test(tld.punycode))
 
@@ -35,7 +36,7 @@ const TldPage = () => {
   const onInput: React.FormEventHandler<HTMLInputElement> = event => {
     event.preventDefault()
     const { value } = event.currentTarget
-    setFilter(value ? new RegExp(value, 'gi') : INITIAL_TLD_FILTER)
+    setFilter(value ? new RegExp(value, 'gi') : undefined)
   }
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = event => {
@@ -66,6 +67,8 @@ const TldPage = () => {
 
       <form onSubmit={onSubmit} className="flex gap-2 mt-4">
         <Input
+          autoComplete="off"
+          autoCorrect="off"
           id="tld"
           name="tld"
           onInput={onInput}
@@ -75,21 +78,19 @@ const TldPage = () => {
           <PopoverTrigger>
             <Info />
           </PopoverTrigger>
-          <PopoverContent className="prose *:my-1">
-            <H4>Regular expression search</H4>
-            <Paragraph>
-              The regular expression is global and case-insensitive.
-            </Paragraph>
-            <Paragraph>
-              For example, to list domains ending with AA type <Code>aa$</Code>
-            </Paragraph>
-            <Paragraph>
-              To list domains beginning with AA type <Code>^aa</Code>
-            </Paragraph>
-            <Paragraph>
-              To fuzzily match any top level domain that contains AA type{' '}
+          <PopoverContent className="text-xs *:my-2">
+            <H4 className="[&]:my-0">Regular expression search</H4>
+            <Text>The regular expression is global and case-insensitive.</Text>
+            <Text>
+              To list domains that end with AA: <Code>aa$</Code>
+            </Text>
+            <Text>
+              To list domains that begin with AA: <Code>^aa</Code>
+            </Text>
+            <Text>
+              To fuzzily match any top level domain that contains AA:{' '}
               <Code>aa</Code>
-            </Paragraph>
+            </Text>
           </PopoverContent>
         </Popover>
       </form>
