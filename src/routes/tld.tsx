@@ -61,7 +61,7 @@ const TldPage = () => {
     <main className="max-w-prose mx-auto py-8">
       <H1>Top level domains</H1>
 
-      <Paragraph className="text-foreground/70">
+      <Paragraph className="text-foreground/70 mt-2">
         All top level domains in the root zone, updated <b>{updatedAt}</b>
       </Paragraph>
 
