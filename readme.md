@@ -7,10 +7,9 @@ This is a React app based on Tanstack Router, using Vite as the bundler. Shadcn 
 ```sh
 src
 ├── components  # reusable components
-├── routes      # routes, these re-export views from views
+├── routes      # routes
 ├── services    # network logic
 ├── types       # typescript interfaces
-└── views       # actual pages
 ```
 
 ## License
