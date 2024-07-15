@@ -3,8 +3,8 @@ import { ThemeToggle } from '~/components/theme-toggle'
 
 export function Header() {
   return (
-    <header>
-      <nav className="p-2 flex gap-2 items-center">
+    <header className="max-w-prose mx-auto flex justify-between py-4">
+      <nav className="flex gap-2 items-center">
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>
@@ -14,9 +14,8 @@ export function Header() {
         <Link to="/whois" className="[&.active]:font-bold">
           Whois
         </Link>
-
-        <ThemeToggle />
       </nav>
+      <ThemeToggle />
     </header>
   )
 }

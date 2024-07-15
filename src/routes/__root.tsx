@@ -1,5 +1,9 @@
 import { QueryClient } from '@tanstack/react-query'
-import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
+import {
+  createRootRouteWithContext,
+  Outlet,
+  ScrollRestoration,
+} from '@tanstack/react-router'
 import { BackToTop } from '~/components/back-to-top'
 import { Header } from '~/components/header'
 import { ThemeProvider } from '~/components/theme-provider'
