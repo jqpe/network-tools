@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '~/components/ui/link.tsx'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import React, { memo } from 'react'
 import { List, Text } from '~/components/ui/typography'
