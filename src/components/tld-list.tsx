@@ -12,7 +12,7 @@ interface Props {
 type TldList = (props: Props) => JSX.Element
 
 export const TldList = memo<TldList>(function TldList({ tlds, filter }) {
-  const listRef = React.createRef<HTMLDivElement>()
+  const listRef = React.useRef<HTMLDivElement>(null)
   const shownTlds = tlds.filter(filter)
   const virtualizer = useWindowVirtualizer({
     count: shownTlds.length,
