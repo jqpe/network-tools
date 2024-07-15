@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import { Link } from '~/components/ui/link.tsx'
 import { H1 } from '~/components/ui/typography'
 import { SITE_NAME } from '~/constants'
 
