@@ -1,4 +1,5 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
+import React from 'react'
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,12 @@ import {
 import { IANA_DB } from '~/constants'
 import { ianaOptions, useIana } from '~/services/iana'
 
+// How long to wait before navigating to previous screen upon
+// Dialog being closed; when zero no close animation for dialog
+const DIALOG_CLOSE_DEBOUNCE_MS = 100
+
 const TldPage = () => {
+  const [open, setOpen] = React.useState(true)
   const router = useRouter()
   const params = Route.useParams()
 
@@ -25,8 +31,15 @@ const TldPage = () => {
   const slug = (tld.punycode ?? tld.unicode).toLowerCase()
   const databaseUri = new URL(`${slug}.html`, IANA_DB)
 
+  const onOpenChange = async () => {
+    setOpen(false)
+    await new Promise(resolve => setTimeout(resolve, DIALOG_CLOSE_DEBOUNCE_MS))
+
+    router.history.back()
+  }
+
   return (
-    <Dialog open onOpenChange={() => router.history.replace('/tld')}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{tld.unicode}</DialogTitle>
