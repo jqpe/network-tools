@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '~/components/ui/link.tsx'
 import { ThemeToggle } from '~/components/theme-toggle'
 
 export function Header() {
@@ -14,9 +14,8 @@ export function Header() {
         <Link to="/tld" className="[&.active]:font-bold">
           Top level domains
         </Link>
-        <div className="self-end">
-          <ThemeToggle />
-        </div>
+
+        <ThemeToggle />
       </nav>
     </header>
   )
