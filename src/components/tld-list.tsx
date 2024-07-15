@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import React, { memo } from 'react'
+import { List } from '~/components/ui/typography'
 import { IanaTld } from '~/types/iana.ts'
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 type TldList = (props: Props) => JSX.Element
 
-const List: TldList = ({ tlds, filter }) => {
+export const TldList = memo<TldList>(function TldList({ tlds, filter }) {
   const listRef = React.useRef<HTMLDivElement | null>()
   const shownTlds = tlds.filter(filter)
   const virtualizer = useWindowVirtualizer({
@@ -22,7 +23,7 @@ const List: TldList = ({ tlds, filter }) => {
 
   return (
     <div ref={listRef}>
-      <ul
+      <List
         className="relative"
         style={{ height: `${virtualizer.getTotalSize()}px` }}
       >
@@ -46,9 +47,7 @@ const List: TldList = ({ tlds, filter }) => {
             </li>
           )
         })}
-      </ul>
+      </List>
     </div>
   )
-}
-
-export const TldList = memo(List)
+})

@@ -13,6 +13,7 @@ import {
 import { INITIAL_TLD_FILTER } from '~/constants'
 import { useIana } from '~/services/iana'
 import { IanaTld } from '~/types/iana.ts'
+import { Code, H1, H4, Paragraph } from '~/components/ui/typography'
 
 const TldPage = () => {
   const navigate = useNavigate({ from: '/tld' })
@@ -52,12 +53,12 @@ const TldPage = () => {
   }
 
   return (
-    <main className="prose mx-auto py-8">
-      <h1>Top level domains</h1>
+    <main className="max-w-prose mx-auto py-8">
+      <H1>Top level domains</H1>
 
-      <p>
+      <Paragraph>
         All top level domains in the root zone, updated <b>{updatedAt}</b>
-      </p>
+      </Paragraph>
 
       <form onSubmit={onSubmit} className="flex gap-2">
         <input
@@ -72,18 +73,20 @@ const TldPage = () => {
             <Info />
           </PopoverTrigger>
           <PopoverContent className="prose *:my-1">
-            <h4>Regular expression search</h4>
-            <p>The regular expression is global and case-insensitive.</p>
-            <p>
-              For example, to list domains ending with AA type <code>aa$</code>
-            </p>
-            <p>
-              To list domains beginning with AA type <code>^aa</code>
-            </p>
-            <p>
+            <H4>Regular expression search</H4>
+            <Paragraph>
+              The regular expression is global and case-insensitive.
+            </Paragraph>
+            <Paragraph>
+              For example, to list domains ending with AA type <Code>aa$</Code>
+            </Paragraph>
+            <Paragraph>
+              To list domains beginning with AA type <Code>^aa</Code>
+            </Paragraph>
+            <Paragraph>
               To fuzzily match any top level domain that contains AA type{' '}
-              <code>aa</code>
-            </p>
+              <Code>aa</Code>
+            </Paragraph>
           </PopoverContent>
         </Popover>
       </form>
