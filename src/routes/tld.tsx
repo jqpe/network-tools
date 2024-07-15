@@ -78,11 +78,11 @@ const TldPage = () => {
               For example, to list domains ending with AA type <code>aa$</code>
             </p>
             <p>
-              To list domains beginning with GOO type <code>^goo</code>
+              To list domains beginning with AA type <code>^aa</code>
             </p>
             <p>
-              To fuzzily match any top level domain that contains OOK type{' '}
-              <code>ook</code>
+              To fuzzily match any top level domain that contains AA type{' '}
+              <code>aa</code>
             </p>
           </PopoverContent>
         </Popover>
