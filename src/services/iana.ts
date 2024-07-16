@@ -3,23 +3,38 @@ import {
   useQuery as useSuspenseQuery,
 } from '@tanstack/react-query'
 import punycode from 'punycode/'
-import { IANA_DB, TLD_LIST_URI } from '~/constants'
+import { TLD_LIST_URI } from '~/constants'
 import { IanaResponse, IanaTld } from '~/types/iana'
 
-export const parseDelegationRecordPage = (html: string) => {
+export const delegationRecordPageHtml = (html: string) => {
+  const makeUrlsAbsolute = (element: Element, baseUrl: string) => {
+    element.querySelectorAll('[href], [src]').forEach(el => {
+      const urlAttr = el.hasAttribute('href') ? 'href' : 'src'
+      const relativeUrl = el.getAttribute(urlAttr)
+      if (relativeUrl && !relativeUrl.startsWith('http')) {
+        el.setAttribute(urlAttr, new URL(relativeUrl, baseUrl).href)
+        if (el instanceof HTMLAnchorElement) {
+          el.setAttribute('target', '_blank')
+        }
+      }
+    })
+  }
+
   const parser = new DOMParser()
   const document = parser.parseFromString(html, 'text/html')
 
   const article = document.querySelector<HTMLDivElement>('article > main')
+  const heading = article?.querySelector('h1')
 
-  let type = article?.querySelector('p')?.textContent
-
-  return {
-    /**
-     * E.g. country, gTLD
-     */
-    type,
+  if (heading) {
+    article?.removeChild(heading)
   }
+
+  if (article) {
+    makeUrlsAbsolute(article, 'https://iana.org/')
+  }
+
+  return article?.outerHTML ?? null
 }
 
 export const ianaService = {
@@ -58,7 +73,7 @@ export const ianaService = {
     )
     const text = await response.text()
 
-    return parseDelegationRecordPage(text)
+    return delegationRecordPageHtml(text)
   },
 }
 

@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { AlertTriangle } from 'lucide-react'
 import React from 'react'
-import { Badge } from '~/components/ui/badge'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
 } from '~/components/ui/dialog'
 import { Anchor } from '~/components/ui/link'
+import { Paragraph } from '~/components/ui/typography'
 import { IANA_DB } from '~/constants'
 import { useIfDefined } from '~/hooks/use-if-defined'
 import { tldsOptions, useTld, useTlds } from '~/services/iana'
@@ -33,7 +35,7 @@ const TldPage = () => {
 
   if (!tld) return
 
-  const tldType = tldQuery?.data?.type?.replaceAll(/[()]/g, '')
+  const article = tldQuery?.data
 
   const slug = (tld.punycode ?? tld.unicode).toLowerCase()
   const databaseUri = new URL(`${slug}.html`, IANA_DB)
@@ -54,16 +56,35 @@ const TldPage = () => {
           <DialogTitle>{tld.unicode}</DialogTitle>
           <DialogDescription asChild>
             <div>
-              <section>{tldType && <Badge as="span">{tldType}</Badge>}</section>
-              View this top level domain in the{' '}
-              <Anchor
-                target="_blank"
-                rel="noopener noreferrer"
-                href={databaseUri.toString()}
-                data-punycode={!!tld.punycode}
-              >
-                root
-              </Anchor>
+              <header className="pb-2">
+                View this top level domain in the{' '}
+                <Anchor
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={databaseUri.toString()}
+                  data-punycode={!!tld.punycode}
+                >
+                  root
+                </Anchor>
+              </header>
+              {tldQuery?.isLoading && (
+                <Paragraph>Fetching data from Iana...</Paragraph>
+              )}
+              {tldQuery?.isError && (
+                <Alert variant="destructive">
+                  <AlertTriangle className="w-4 h-4" />
+                  <AlertTitle>Request to Iana failed</AlertTitle>
+                  <AlertDescription>
+                    `{tldQuery?.error.message}` Try again or try the link above
+                  </AlertDescription>
+                </Alert>
+              )}
+              {article && (
+                <article
+                  className="prose dark:prose-invert max-h-[500px] overflow-auto prose-headings:mt-4"
+                  dangerouslySetInnerHTML={{ __html: article }}
+                />
+              )}
             </div>
           </DialogDescription>
         </DialogHeader>
