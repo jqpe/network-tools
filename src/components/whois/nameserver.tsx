@@ -12,11 +12,7 @@ export const Nameservers = <T extends Nameserver = never>(props: {
   const { nameservers } = props
 
   if (!nameservers) {
-    return (
-      <MissingDataAlert
-        title={`Database did not return nameservers for {domain}`}
-      />
-    )
+    return <MissingDataAlert title="Database did not return nameservers" />
   }
 
   return (
