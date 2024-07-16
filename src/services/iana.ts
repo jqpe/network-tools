@@ -2,7 +2,7 @@ import {
   queryOptions,
   useQuery as useSuspenseQuery,
 } from '@tanstack/react-query'
-import punycode from 'punycode'
+import punycode from 'punycode/'
 import { IANA_DB, TLD_LIST_URI } from '~/constants'
 import { IanaResponse, IanaTld } from '~/types/iana'
 
