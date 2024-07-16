@@ -40,12 +40,12 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "@torchauth/vite-plugin-wrangler-spa": "^2.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240712.0",
     "@tanstack/router-devtools": "^1.45.1",
-    "@torchauth/vite-plugin-wrangler-spa": "^2.0.0",
     "@types/node": "^20.14.10",
     "@types/punycode": "^2.1.4",
     "@types/react": "^18.3.3",
