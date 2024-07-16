@@ -57,7 +57,7 @@ const TldPage = () => {
           <DialogDescription asChild>
             <div>
               <header className="pb-2">
-                View this top level domain in the{' '}
+                View this top-level domain in the{' '}
                 <Anchor
                   target="_blank"
                   rel="noopener noreferrer"

@@ -27,7 +27,7 @@ export const TldList = memo<TldList>(function TldList({ tlds, filter }) {
   return (
     <>
       <Text className="text-foreground/70 text-xs mt-2">
-        Showing {shownTlds.length}/{tlds.length} top level domains
+        Showing {shownTlds.length}/{tlds.length} top-level domains
       </Text>
       <div ref={listRef}>
         <List

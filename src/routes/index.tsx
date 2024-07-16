@@ -9,7 +9,7 @@ const Homepage = () => {
     <main className="max-w-prose m-auto py-8 px-2">
       <H1>{SITE_NAME}</H1>
       <Link className="mt-4 block" to="/tld">
-        Search for a top level domain
+        Search for a top-level domain
       </Link>
       <Link className="mt-4 block" to="/whois">
         Whois information

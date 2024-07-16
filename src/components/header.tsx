@@ -13,7 +13,7 @@ export function Header() {
             Home
           </Link>
           <Link to="/tld" className={linkStyles}>
-            Top level domains
+            Top-level domains
           </Link>
           <Link to="/whois" className={linkStyles}>
             Whois

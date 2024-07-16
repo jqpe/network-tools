@@ -30,7 +30,7 @@ const WhoisPage = () => {
       <H1>Whois</H1>
       <Paragraph className="text-foreground/70 mt-2">
         Lookup whois information (e.g. expiry date, status...) for a domain. Not
-        all top level domains are supported at the moment, but common ones are.
+        all top-level domains are supported at the moment, but common ones are.
         Mileage may vary.
       </Paragraph>
       <form onSubmit={onSubmit} className="flex gap-2 mt-4">

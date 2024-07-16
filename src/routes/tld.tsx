@@ -59,10 +59,10 @@ const TldPage = () => {
 
   return (
     <main className="max-w-prose mx-auto py-8 px-2">
-      <H1>Top level domains</H1>
+      <H1>Top-level domains</H1>
 
       <Paragraph className="text-foreground/70 mt-2">
-        All top level domains in the root zone, updated <b>{updatedAt}</b>
+        All top-level domains in the root zone, updated <b>{updatedAt}</b>
       </Paragraph>
 
       <form onSubmit={onSubmit} className="flex gap-2 mt-4">
@@ -88,7 +88,7 @@ const TldPage = () => {
               To list domains that begin with AA: <Code>^aa</Code>
             </Text>
             <Text>
-              To fuzzily match any top level domain that contains AA:{' '}
+              To fuzzily match any top-level domain that contains AA:{' '}
               <Code>aa</Code>
             </Text>
           </PopoverContent>
