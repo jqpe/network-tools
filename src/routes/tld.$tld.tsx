@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import React from 'react'
+import { Badge } from '~/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -32,7 +33,7 @@ const TldPage = () => {
 
   if (!tld) return
 
-  console.log(tldQuery?.data)
+  const tldType = tldQuery?.data?.type?.replaceAll(/[()]/g, '')
 
   const slug = (tld.punycode ?? tld.unicode).toLowerCase()
   const databaseUri = new URL(`${slug}.html`, IANA_DB)
@@ -51,16 +52,19 @@ const TldPage = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{tld.unicode}</DialogTitle>
-          <DialogDescription>
-            View this top level domain in the{' '}
-            <Anchor
-              target="_blank"
-              rel="noopener noreferrer"
-              href={databaseUri.toString()}
-              data-punycode={!!tld.punycode}
-            >
-              root
-            </Anchor>
+          <DialogDescription asChild>
+            <div>
+              <section>{tldType && <Badge as="span">{tldType}</Badge>}</section>
+              View this top level domain in the{' '}
+              <Anchor
+                target="_blank"
+                rel="noopener noreferrer"
+                href={databaseUri.toString()}
+                data-punycode={!!tld.punycode}
+              >
+                root
+              </Anchor>
+            </div>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

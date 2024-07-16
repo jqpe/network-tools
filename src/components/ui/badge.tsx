@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import type * as Polymorphic from '~/types/polymorphic'
 
 import { cn } from '~/utils'
 
@@ -27,10 +28,17 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+const Badge = React.forwardRef(function Badge(
+  { className, variant, as: As = 'div', ...props },
+  forwardedRef
+) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <As
+      ref={forwardedRef}
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
   )
-}
+}) as Polymorphic.ForwardRefComponent<'div', BadgeProps>
 
 export { Badge, badgeVariants }
