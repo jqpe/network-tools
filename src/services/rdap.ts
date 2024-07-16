@@ -1,5 +1,5 @@
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
-import tlds from '~/../public/tlds.json'
+import tlds from '~/tlds.json'
 
 function trimSlash(input: string) {
   return input.endsWith('/') ? input.slice(0, -1) : input
