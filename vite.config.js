@@ -5,6 +5,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import { viteWranglerSpa } from '@torchauth/vite-plugin-wrangler-spa'
 
 const TESTING = process.env.NODE_ENV === 'test'
+const DEV = process.env.NODE_ENV === 'development'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     !TESTING && TanStackRouterVite(),
-    !TESTING && viteWranglerSpa(),
+    DEV && viteWranglerSpa(),
   ],
 })
