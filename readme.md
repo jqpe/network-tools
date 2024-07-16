@@ -2,19 +2,13 @@
 
 ![network-tools](https://github.com/user-attachments/assets/6f40d6ff-bad8-4600-9787-6cbf076d51e8)
 
+Network tools lets you query whois servers (with https://about.rdap.org/) to answer when a domain was first registered or when it will expire, among other data. You can also view and filter all top-level domains in the root zone. 
+
 ## Overview
 
 This is a React app based on Tanstack Router, using Vite as the bundler. Shadcn UI for user interface components and Tailwind.css for styling. Mostly written in TypeScript. Large lists are virtualized with @tanstack/react-virtual. Uses Cloudflare workers for server-side functionality.
 
 To develop locally run `corepack enable`, `pnpm i` and finally `pnpm dev`
-
-```sh
-src
-├── components  # reusable components
-├── routes      # routes
-├── services    # network logic
-├── types       # typescript interfaces
-```
 
 ## License
 
