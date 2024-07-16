@@ -9,7 +9,8 @@ import {
 } from '~/components/ui/dialog'
 import { Anchor } from '~/components/ui/link'
 import { IANA_DB } from '~/constants'
-import { tldsOptions, useTlds } from '~/services/iana'
+import { useIfDefined } from '~/hooks/use-if-defined'
+import { tldsOptions, useTld, useTlds } from '~/services/iana'
 
 // How long to wait before navigating to previous screen upon
 // Dialog being closed; when zero no close animation for dialog
@@ -27,8 +28,11 @@ const TldPage = () => {
       (tld.punycode ?? tld.unicode).toLowerCase() === params.tld.toLowerCase()
     )
   })
+  const tldQuery = useIfDefined(useTld, tld?.punycode ?? tld?.unicode)
 
   if (!tld) return
+
+  console.log(tldQuery?.data)
 
   const slug = (tld.punycode ?? tld.unicode).toLowerCase()
   const databaseUri = new URL(`${slug}.html`, IANA_DB)
@@ -37,8 +41,8 @@ const TldPage = () => {
     setOpen(false)
     await new Promise(resolve => setTimeout(resolve, DIALOG_CLOSE_DEBOUNCE_MS))
 
-    // TODO: when navigating from dialog -> tld , dialog -> tld ... 
-    // we will have 1...Infinite occurances of /tld route in the stack 
+    // TODO: when navigating from dialog -> tld , dialog -> tld ...
+    // we will have 1...Infinite occurances of /tld route in the stack
     navigate({ to: '/tld', replace: true })
   }
 

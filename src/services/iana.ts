@@ -12,16 +12,13 @@ export const parseDelegationRecordPage = (html: string) => {
 
   const article = document.querySelector<HTMLDivElement>('article > main')
 
-  let isGTLD = /(Generic top-level domain)/.test(
-    article?.querySelector('p')?.textContent ?? ''
-  )
+  let type = article?.querySelector('p')?.textContent
 
   return {
     /**
-     * Is this TLD part of the Generic top level domain program?
-     * @see https://en.wikipedia.org/wiki/Generic_top-level_domain
+     * E.g. country, gTLD
      */
-    isGTLD,
+    type,
   }
 }
 
@@ -56,7 +53,9 @@ export const ianaService = {
     return { updatedAt, tlds }
   },
   getTld: async (tld: string) => {
-    const response = await fetch(new URL(`${tld.toLowerCase()}.html`, IANA_DB))
+    const response = await fetch(
+      new URL(`/api/iana/db/${tld.toLowerCase()}.html`, window.location.origin)
+    )
     const text = await response.text()
 
     return parseDelegationRecordPage(text)

@@ -5,6 +5,8 @@ import { describe, expect, test } from 'vitest'
 
 describe(parseDelegationRecordPage.name, () => {
   test('expected properties', () => {
-    expect(parseDelegationRecordPage(html)).toStrictEqual({ isGTLD: true })
+    const page = parseDelegationRecordPage(html)
+
+    expect(page.type).toMatch(/generic/i)
   })
 })
