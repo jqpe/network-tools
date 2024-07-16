@@ -1,7 +1,14 @@
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '~/components/ui/popover.tsx'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { Info } from 'lucide-react'
 import React from 'react'
 import { Input } from '~/components/ui/input'
-import { H1, Paragraph } from '~/components/ui/typography'
+import { Code, H1, H4, Paragraph, Text } from '~/components/ui/typography'
+import { Anchor } from '~/components/ui/link'
 
 const WhoisPage = () => {
   const navigate = Route.useNavigate()
@@ -42,6 +49,29 @@ const WhoisPage = () => {
           onInput={onInput}
           placeholder="Enter a domain, e.g. google.com"
         />
+        <Popover>
+          <PopoverTrigger>
+            <Info />
+          </PopoverTrigger>
+          <PopoverContent className="text-xs *:my-2">
+            <H4 className="[&]:my-0">How does it work?</H4>
+            <Text>
+              The service is based on{' '}
+              <Anchor href="https://about.rdap.org">
+                Registration Data Access Protocol (RDAP)
+              </Anchor>
+              , which is a novel alternative to proprietary whois servers.
+            </Text>
+            <Text>
+              As DRAP is still new, some top-level domains don't support it.
+              Common ones like <Code>.com</Code> and <Code>.org</Code> do.
+            </Text>
+            <Text>
+              You can search using fully qualified domain names, IP addresses,
+              or with autonomous system numbers.
+            </Text>
+          </PopoverContent>
+        </Popover>
       </form>
       <Outlet />
     </main>
