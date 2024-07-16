@@ -63,7 +63,7 @@ const WhoisPage = () => {
               , which is a novel alternative to proprietary whois servers.
             </Text>
             <Text>
-              As DRAP is still new, some top-level domains don't support it.
+              As RDAP is still new, some top-level domains don't support it.
               Common ones like <Code>.com</Code> and <Code>.org</Code> do.
             </Text>
             <Text>
