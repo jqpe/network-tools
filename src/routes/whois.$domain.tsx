@@ -11,7 +11,9 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table'
-import { H2, H3, List } from '~/components/ui/typography'
+import { H2, H3 } from '~/components/ui/typography'
+import { Nameservers } from '~/components/whois/nameserver'
+import { Status } from '~/components/whois/status'
 import { useWhois, whoisOptions } from '~/services/rdap'
 
 const WhoisPageError = ({ error }: ErrorComponentProps) => {
@@ -43,14 +45,14 @@ const WhoisPage = () => {
   const whoisQuery = useWhois(domain)
   const whois = whoisQuery.data
 
-  console.log(whois)
-
   return (
     <article className="mt-4">
-      <H2 className="text-lg">Whois information for {whois.ldhName}</H2>
+      <H2 className="text-lg">
+        Whois information for {whois.ldhName ?? domain}
+      </H2>
 
       <Table>
-        <TableCaption>Events for {domain}</TableCaption>
+        <TableCaption className="sr-only">Events for {domain}</TableCaption>
         <TableHeader className="sr-only">
           <TableRow>
             <TableHead>Action</TableHead>
@@ -71,19 +73,15 @@ const WhoisPage = () => {
         </TableBody>
       </Table>
 
-      <H3 className="text-lg">Nameservers</H3>
-      <List>
-        {whois.nameservers.map(nameserver => (
-          <li key={nameserver.ldhName}>{nameserver.ldhName}</li>
-        ))}
-      </List>
+      <section id="nameservers">
+        <H3 className="text-lg">Nameservers</H3>
+        <Nameservers nameservers={whois.nameservers} />
+      </section>
 
-      <H3 className="text-lg">Status</H3>
-      <List>
-        {whois.status.map(status => (
-          <li key={status}>{status}</li>
-        ))}
-      </List>
+      <section id="status">
+        <H3 className="text-lg">Status</H3>
+        <Status status={whois.status} />
+      </section>
     </article>
   )
 }
