@@ -4,7 +4,7 @@
 
 This is a React app based on Tanstack Router, using Vite as the bundler. Shadcn UI for user interface components and Tailwind.css for styling. Mostly written in TypeScript. Large lists are virtualized with @tanstack/react-virtual. Uses Cloudflare workers for server-side functionality.
 
-To develop locally run `corepack install`, `pnpm i` and finally `pnpm dev`
+To develop locally run `corepack enable`, `pnpm i` and finally `pnpm dev`
 
 ```sh
 src
